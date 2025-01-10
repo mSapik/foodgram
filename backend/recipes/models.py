@@ -40,7 +40,7 @@ class Ingredient(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['name', 'measurement_unit'],
-                name='Uniqaue ingredient')
+                name='unique_ingredient')
         ]
 
     def __str__(self) -> str:
@@ -58,7 +58,11 @@ class Recipe(models.Model):
         verbose_name='Название рецепта'
     )
     text = models.TextField(verbose_name='Рецепт')
-    image = models.ImageField(blank=False, upload_to="recipe_images/")
+    image = models.ImageField(
+        blank=False,
+        upload_to="recipe_images/",
+        verbose_name='Изображение'
+    )
     ingredients = models.ManyToManyField(
         Ingredient,
         verbose_name='Ингредиенты'
