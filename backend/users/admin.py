@@ -1,40 +1,28 @@
 from django.contrib import admin
 
-from recipes.models import Ingredient, Recipe, Tag
+from recipes.models import Recipe
+from users.models import User
 
 
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
+class RecipeInline(admin.StackedInline):
+    model = Recipe
+    extra = 0
+
+
+@admin.register(User)
+class User(admin.ModelAdmin):
+    inlines = (RecipeInline,)
     list_display = (
-        'name',
-        'slug',
+        'email',
+        'username',
+        'first_name',
+        'last_name',
+        'role',
+        'email',
+        'avatar'
     )
-    search_fields = ('slug',)
-    list_filter = ('slug',)
-
-
-@admin.register(Ingredient)
-class IngredientAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'measurement_unit',
+    search_fields = ('user', 'email',)
+    list_filter = ('role',)
+    list_editable = (
+        'role',
     )
-    search_fields = ('name', 'measurement_unit',)
-    list_filter = ('measurement_unit',)
-
-
-@admin.register(Recipe)
-class RecipeAdmin(admin.ModelAdmin):
-    list_display = (
-        'author',
-        'name',
-        'cooking_time',
-        'pub_date'
-    )
-    search_fields = ('name', 'author__username', 'ingredients__name')
-    list_filter = ('tags', 'pub_date',)
-    list_editable = ('name', 'cooking_time',)
-    filter_horizontal = ('tags', 'ingredients')
-
-
-admin.site.empty_value_display = 'Не задано'

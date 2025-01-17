@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class User(AbstractUser):
@@ -40,3 +42,14 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return self.username
+
+    @property
+    def is_admin(self):
+        return self.role == 'admin'
+
+    @receiver(post_save, sender='users.User')
+    def set_admin_role_for_superuser(sender, instance, created, **kwargs):
+        if created:
+            if instance.is_superuser:
+                instance.role = 'admin'
+                instance.save()
