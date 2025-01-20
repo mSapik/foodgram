@@ -11,13 +11,13 @@ class User(AbstractUser):
         verbose_name='Электронная почта'
     )
     username = models.CharField(
-        verbose_name='Логин', max_length=50, unique=True
+        verbose_name='Логин', max_length=150, unique=True
     )
     first_name = models.CharField(
-        verbose_name='Имя', max_length=50
+        verbose_name='Имя', max_length=150
     )
     last_name = models.CharField(
-        verbose_name='Фамилия', max_length=50
+        verbose_name='Фамилия', max_length=150
     )
     role = models.CharField(
         max_length=20,

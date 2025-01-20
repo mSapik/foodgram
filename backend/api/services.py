@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+
 from recipes.models import AmountIngredient
 
 
@@ -31,5 +32,8 @@ def shopping_list_txt(user) -> HttpResponse:
         text_shop_list += f'{name} - {amount} {measurement_unit[name]}\n'
 
     response = HttpResponse(text_shop_list, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename="shopping_list.txt"'
+    response['Content-Disposition'] = (
+        'attachment; filename="shopping_list.txt"'
+    )
+
     return response

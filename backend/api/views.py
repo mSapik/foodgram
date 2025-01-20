@@ -1,6 +1,6 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
@@ -14,9 +14,8 @@ from api.filters import IngredientFilter, RecipeFilter, TagFilter
 from api.mixins import IngridientTagMixin
 from api.permissions import IsAuthorOrReadOnly
 from api.services import shopping_list_txt
-from recipes.models import (
-    Favorite, Ingredient, Recipe, ShopingList, Subscription, Tag
-)
+from recipes.models import (Favorite, Ingredient, Recipe, ShopingList,
+                            Subscription, Tag)
 from users.models import User
 
 

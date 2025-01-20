@@ -1,5 +1,5 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
 
 from users.models import User
 
@@ -23,7 +23,7 @@ class Tag(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(
-        max_length=20,
+        max_length=60,
         verbose_name='Ингредиент',
         unique=True
     )

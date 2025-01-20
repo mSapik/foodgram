@@ -7,10 +7,8 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from api.mixins import AmountMixin, ChosenMixin
-from recipes.models import (
-    AmountIngredient, Favorite, Ingredient,
-    ShopingList, Subscription, Recipe, Tag
-)
+from recipes.models import (AmountIngredient, Favorite, Ingredient, Recipe,
+                            ShopingList, Subscription, Tag)
 from users.models import User
 
 
@@ -33,11 +31,10 @@ class SignUpSerializer(serializers.ModelSerializer):
     Сериализатор для регистрации нового пользователя.
     """
     email = serializers.EmailField(
-        max_length=30,
         required=True
     )
     username = serializers.CharField(
-        max_length=20,
+        max_length=150,
         required=True
     )
     password = serializers.CharField(write_only=True, required=True)
