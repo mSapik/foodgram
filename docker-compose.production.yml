@@ -28,7 +28,7 @@ services:
   nginx:
     image: msapik/foodgram-gateway
     ports:
-      - "8001:80"
+      - 8001:80
     volumes:
       - static:/staticfiles
       - media:/app/media
