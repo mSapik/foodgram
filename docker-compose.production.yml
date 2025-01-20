@@ -19,7 +19,7 @@ services:
       - db
     volumes:
       - static:/backend_static
-      - media:/media
+      - media:app/media
   frontend:
     image: msapik/foodgram-frontend
     command: cp -r /app/build/. /frontend_static/
