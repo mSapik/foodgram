@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from recipes.models import Ingredient, Recipe, Tag
+from recipes.models import Favorite, Ingredient, Recipe, Tag
 
 
 @admin.register(Tag)
@@ -9,7 +9,7 @@ class TagAdmin(admin.ModelAdmin):
         'name',
         'slug',
     )
-    search_fields = ('slug',)
+    search_fields = ('name', 'slug',)
     list_filter = ('slug',)
 
 
@@ -35,6 +35,11 @@ class RecipeAdmin(admin.ModelAdmin):
     list_filter = ('tags', 'pub_date',)
     list_editable = ('name', 'cooking_time',)
     filter_horizontal = ('tags', 'ingredients')
+    readonly_fields = ('in_favorites',)
+
+    def in_favorites(self, obj):
+        """Количество рецепта в избранном"""
+        return Favorite.objects.filter(recipe=obj).count()
 
 
 admin.site.empty_value_display = 'Не задано'
