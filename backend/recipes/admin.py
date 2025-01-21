@@ -29,7 +29,8 @@ class RecipeAdmin(admin.ModelAdmin):
         'author',
         'name',
         'cooking_time',
-        'pub_date'
+        'pub_date',
+        'in_favorites',
     )
     search_fields = ('name', 'author__username', 'ingredients__name')
     list_filter = ('tags', 'pub_date',)
