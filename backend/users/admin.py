@@ -1,28 +1,18 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
-from recipes.models import Recipe
 from users.models import User
 
 
-class RecipeInline(admin.StackedInline):
-    model = Recipe
-    extra = 0
-
-
 @admin.register(User)
-class User(admin.ModelAdmin):
-    inlines = (RecipeInline,)
+class UsersAdmin(UserAdmin):
+
     list_display = (
-        'email',
+        'id',
         'username',
         'first_name',
         'last_name',
-        'role',
         'email',
-        'avatar'
+        'role'
     )
-    search_fields = ('user', 'email',)
-    list_filter = ('role',)
-    list_editable = (
-        'role',
-    )
+    search_fields = ('username', 'email')

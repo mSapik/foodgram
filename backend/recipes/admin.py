@@ -28,18 +28,16 @@ class RecipeAdmin(admin.ModelAdmin):
     list_display = (
         'author',
         'name',
-        'cooking_time',
         'pub_date',
         'in_favorites',
     )
     search_fields = ('name', 'author__username', 'ingredients__name')
     list_filter = ('tags', 'pub_date',)
-    list_editable = ('name', 'cooking_time',)
+    list_editable = ('name',)
     filter_horizontal = ('tags', 'ingredients')
     readonly_fields = ('in_favorites',)
 
     def in_favorites(self, obj):
-        """Количество рецепта в избранном"""
         return Favorite.objects.filter(recipe=obj).count()
 
 
