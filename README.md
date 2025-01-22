@@ -10,14 +10,7 @@ Foodgram – это не просто платформа, предоставля
 **_Ссылка на [админку](http://foodgram.sapik.ru/admin/ "Ссылка на админку.")_**
 
 ### Проект использует:
-Django
-Python
-Gunicorn
-Nginx
-JS
-Node.js
-PostgreSQL
-Docker
+Django, Python3, Gunicorn, ,Nginx ,JS ,Node.js ,PostgreSQL ,Docker
 
 ### Установка
 1. Клонируйте репозиторий:
