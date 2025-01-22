@@ -6,6 +6,7 @@ from django.core.files.base import ContentFile
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
+from api.constants import MAX_VALUE, MIN_VALUE, NAME_LENGHT
 from api.mixins import AmountMixin, ChosenMixin
 from recipes.models import (AmountIngredient, Favorite, Ingredient, Recipe,
                             ShopingList, Subscription, Tag)
@@ -34,7 +35,7 @@ class SignUpSerializer(serializers.ModelSerializer):
         required=True
     )
     username = serializers.CharField(
-        max_length=150,
+        max_length=NAME_LENGHT,
         required=True
     )
     password = serializers.CharField(write_only=True, required=True)
@@ -121,8 +122,8 @@ class AddIngredientSerializer(serializers.ModelSerializer):
     """Сериализатор данных для добавления ингредиентов в рецепт."""
     id = serializers.PrimaryKeyRelatedField(queryset=Ingredient.objects.all())
     amount = serializers.IntegerField(
-        min_value=1,
-        max_value=9999
+        min_value=MIN_VALUE,
+        max_value=MAX_VALUE
     )
 
     class Meta:
@@ -142,8 +143,8 @@ class RecipeGetSerializer(serializers.ModelSerializer, ChosenMixin):
     image = Base64ImageField()
     text = serializers.CharField()
     cooking_time = serializers.IntegerField(
-        min_value=1,
-        max_value=9999
+        min_value=MIN_VALUE,
+        max_value=MAX_VALUE
     )
 
     class Meta:

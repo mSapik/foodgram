@@ -17,7 +17,7 @@ class IngridientTagMixin(
     permission_classes = (permissions.AllowAny,)
 
 
-class AmountMixin():
+class AmountMixin:
     """
     Миксин для работы с количеством ингредиентов.
     """
