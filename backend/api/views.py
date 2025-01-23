@@ -14,7 +14,9 @@ from api.filters import IngredientFilter, RecipeFilter, TagFilter
 from api.mixins import IngridientTagMixin
 from api.permissions import IsAuthorOrReadOnly
 from api.services import shopping_list_txt
-from recipes.models import Favorite, Ingredient, Recipe, ShopingList, Tag
+from recipes.models import (
+    Favorite, Ingredient, Recipe, ShopingList, Subscription, Tag
+)
 from users.models import User
 
 
@@ -85,8 +87,9 @@ class UserViewSet(viewsets.ModelViewSet):
         permission_classes=[IsAuthenticated, ],
     )
     def subscriptions(self, request):
-        user = self.request.user
-        paginate_subs = self.paginate_queryset(user.subscriptions.all())
+        paginate_subs = self.paginate_queryset(
+            Subscription.objects.filter(user=self.request.user)
+        )
         serializer = serializers.SubscribeSerializer(
             paginate_subs,
             many=True,
