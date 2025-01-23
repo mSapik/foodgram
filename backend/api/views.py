@@ -187,7 +187,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     filterset_class = RecipeFilter
     permission_classes = [IsAuthorOrReadOnly]
     http_method_names = ['get', 'post', 'patch', 'delete']
-    pagination_class = LimitOffsetPagination
 
     def get_serializer_class(self):
         if self.request.method in permissions.SAFE_METHODS:
